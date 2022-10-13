@@ -359,3 +359,102 @@ mysql> select * from payroll_service;
 |  3 | Charlie |         NULL | NULL    |            | M      | 3000000 |         0 |          0 |           0 |          0 |       0 | 2020-03-21 |
 +----+---------+--------------+---------+------------+--------+---------+-----------+------------+-------------+------------+---------+------------+
 3 rows in set (0.00 sec)
+
+************************************************************************
+UC10= Ability to make Terissa as part of Sales and Marketing Department
+************************************************************************
+
+mysql> insert into payroll_service(name, phone_number, address, department, gender, salary, basic_pay, deductions, taxable_pay, income_tax, net_pay, start_date) values
+    -> ("Terissa", NULL, NULL, "Marketing", 'F', 5000000, 0, 0, 0, 0, 0, "2021-10-09");
+Query OK, 1 row affected (0.23 sec)
+
+mysql> select * from payroll_service;
++----+---------+--------------+---------+------------+--------+---------+-----------+------------+-------------+------------+---------+------------+
+| id | name    | phone_number | address | department | gender | salary  | basic_pay | deductions | taxable_pay | income_tax | net_pay | start_date |
++----+---------+--------------+---------+------------+--------+---------+-----------+------------+-------------+------------+---------+------------+
+|  1 | Bill    |         NULL | NULL    |            | M      | 1000000 |         0 |          0 |           0 |          0 |       0 | 2018-01-03 |
+|  2 | Terisa  |         NULL | NULL    |            | F      | 2000000 |         0 |          0 |           0 |          0 |       0 | 2019-01-03 |
+|  3 | Charlie |         NULL | NULL    |            | M      | 3000000 |         0 |          0 |           0 |          0 |       0 | 2020-03-21 |
+|  4 | Terissa |         NULL | NULL    | Marketing  | F      | 5000000 |         0 |          0 |           0 |          0 |       0 | 2021-10-09 |
++----+---------+--------------+---------+------------+--------+---------+-----------+------------+-------------+------------+---------+------------+
+
+
+mysql> show tables;
++---------------------------+
+| Tables_in_payroll_service |
++---------------------------+
+| payroll_service           |
++---------------------------+
+1 row in set (0.01 sec)
+
+mysql> create table company
+    -> (company_ID INT PRIMARY KEY,
+    -> company_Name VARCHAR(15) NOT NULL
+    -> );
+Query OK, 0 rows affected (1.93 sec)
+
+mysql> describe company;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| company_ID   | int         | NO   | PRI | NULL    |       |
+| company_Name | varchar(15) | NO   |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+2 rows in set (0.12 sec)
+
+mysql> insert into company (company_ID, company_Name) values
+    -> (1, 'bridgelabz');
+Query OK, 1 row affected (0.26 sec)
+
+mysql> select * from company;
++------------+--------------+
+| company_ID | company_Name |
++------------+--------------+
+|          1 | bridgelabz   |
++------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> create table employee
+    -> (
+    ->  id INT unsigned NOT NULL AUTO_INCREMENT,
+    -> name VARCHAR(100) NOT NULL,
+    -> salary DOUBLE NOT NULL,
+    -> company_ID INT,
+    -> Foreign Key (company_ID) REFERENCES Company (company_ID),
+    -> PRIMARY KEY (id)
+    -> );
+Query OK, 0 rows affected (1.68 sec)
+
+mysql> describe employee;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(100) | NO   |     | NULL    |                |
+| salary     | double       | NO   |     | NULL    |                |
+| company_ID | int          | YES  | MUL | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.04 sec)
+
+mysql> insert into employee( name, salary, company_ID) values
+    -> ( 'rutuja', 30000, 1);
+Query OK, 1 row affected (0.17 sec)
+
+mysql> select * from employee;
++----+--------+--------+------------+
+| id | name   | salary | company_ID |
++----+--------+--------+------------+
+|  1 | rutuja |  30000 |          1 |
++----+--------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> show tables;
++---------------------------+
+| Tables_in_payroll_service |
++---------------------------+
+| company                   |
+| employee                  |
+| payroll_service           |
++---------------------------+
+3 rows in set (0.04 sec)
+4 rows in set (0.00 sec)
