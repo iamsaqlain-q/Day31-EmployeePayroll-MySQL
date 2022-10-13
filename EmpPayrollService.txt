@@ -72,3 +72,17 @@ mysql> insert into payroll_service (name,salary,start_date) values('Bill' ,10000
     -> ('Charlie', 3000000.00,'2020-03-21');
 Query OK, 3 rows affected (0.78 sec)
 Records: 3  Duplicates: 0  Warnings: 0
+
+*******************************************************************************************************
+UC4= Ability to retrieve all the employee payroll data that is added to payroll service database
+******************************************************************************************************
+
+mysql> select * from payroll_service;
++----+---------+---------+------------+
+| id | name    | salary  | start_date |
++----+---------+---------+------------+
+|  1 | Bill    | 1000000 | 2018-01-03 |
+|  2 | Terisa  | 2000000 | 2019-01-03 |
+|  3 | Charlie | 3000000 | 2020-03-21 |
++----+---------+---------+------------+
+3 rows in set (0.11 sec)
