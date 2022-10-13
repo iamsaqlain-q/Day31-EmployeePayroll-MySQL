@@ -305,3 +305,57 @@ mysql> describe payroll_service;
 | start_date   | date         | NO   |     | NULL    |                |
 +--------------+--------------+------+-----+---------+----------------+
 8 rows in set (0.16 sec)
+
+***************************************************************************************************************
+UC9= Ability to extend employee_payroll table to have Basic Pay, Deductions, Taxable Pay, Income Tax, Net Pay
+***************************************************************************************************************
+
+mysql> alter table payroll_service add basic_pay double not null after salary;
+Query OK, 0 rows affected (2.75 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table payroll_service add deductions double not null after basic_pay;
+Query OK, 0 rows affected (2.23 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table payroll_service add taxable_pay double not null after deductions;
+Query OK, 0 rows affected (2.36 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table payroll_service add income_tax double not null after taxable_pay;
+Query OK, 0 rows affected (2.66 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table payroll_service add net_pay double not null after income_tax;
+Query OK, 0 rows affected (1.16 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe payroll_service;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| id           | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name         | varchar(150) | NO   |     | NULL    |                |
+| phone_number | bigint       | YES  |     | NULL    |                |
+| address      | varchar(250) | YES  |     | NULL    |                |
+| department   | varchar(150) | NO   |     | NULL    |                |
+| gender       | char(1)      | YES  |     | NULL    |                |
+| salary       | double       | NO   |     | NULL    |                |
+| basic_pay    | double       | NO   |     | NULL    |                |
+| deductions   | double       | NO   |     | NULL    |                |
+| taxable_pay  | double       | NO   |     | NULL    |                |
+| income_tax   | double       | NO   |     | NULL    |                |
+| net_pay      | double       | NO   |     | NULL    |                |
+| start_date   | date         | NO   |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+13 rows in set (0.09 sec)
+
+mysql> select * from payroll_service;
++----+---------+--------------+---------+------------+--------+---------+-----------+------------+-------------+------------+---------+------------+
+| id | name    | phone_number | address | department | gender | salary  | basic_pay | deductions | taxable_pay | income_tax | net_pay | start_date |
++----+---------+--------------+---------+------------+--------+---------+-----------+------------+-------------+------------+---------+------------+
+|  1 | Bill    |         NULL | NULL    |            | M      | 1000000 |         0 |          0 |           0 |          0 |       0 | 2018-01-03 |
+|  2 | Terisa  |         NULL | NULL    |            | F      | 2000000 |         0 |          0 |           0 |          0 |       0 | 2019-01-03 |
+|  3 | Charlie |         NULL | NULL    |            | M      | 3000000 |         0 |          0 |           0 |          0 |       0 | 2020-03-21 |
++----+---------+--------------+---------+------------+--------+---------+-----------+------------+-------------+------------+---------+------------+
+3 rows in set (0.00 sec)
