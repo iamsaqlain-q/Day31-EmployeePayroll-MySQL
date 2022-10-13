@@ -1,0 +1,40 @@
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 324
+Server version: 8.0.30 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+**************************************************
+UC1: Ability to create a payroll service database
+*************************************************
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| bridgelabz         |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (1.92 sec)
+
+mysql> create database Payroll_Service;
+Query OK, 1 row affected (1.03 sec)
+
+mysql> use payroll_service;
+Database changed
+mysql> SELECT DATABASE();
++-----------------+
+| DATABASE()      |
++-----------------+
+| payroll_service |
++-----------------+
+1 row in set (0.00 sec)
