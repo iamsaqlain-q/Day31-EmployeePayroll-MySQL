@@ -62,3 +62,13 @@ mysql> describe payroll_service;
 | start_date | date         | NO   |     | NULL    |                |
 +------------+--------------+------+-----+---------+----------------+
 4 rows in set (0.20 sec)
+
+*******************************************************************************************************
+UC3= Ability to create employee payroll data in the payroll service database as part of CRUD Operation
+*******************************************************************************************************
+
+mysql> insert into payroll_service (name,salary,start_date) values('Bill' ,1000000.00,'2018-01-03'),
+    -> ('Terisa', 2000000.00,'2019-01-03'),
+    -> ('Charlie', 3000000.00,'2020-03-21');
+Query OK, 3 rows affected (0.78 sec)
+Records: 3  Duplicates: 0  Warnings: 0
